@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGL - Projeto Pop-Pod | A Revolução da Mobilidade Urbana</title>
+    <style>
+        :root {
+            --primary: #00ff88;
+            --bg-dark: #121214;
+            --bg-card: #1a1a1e;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: rgba(26, 26, 30, 0.95);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #2a2a30;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Seção Hero */
+        .hero {
+            padding: 150px 5% 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at top, #1f3d31 0%, var(--bg-dark) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        /* Container da Imagem do Projeto */
+        .vehicle-image-container {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 2px solid #2a2a30;
+            margin-bottom: 40px;
+        }
+
+        .vehicle-image-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Seções de Conteúdo */
+        .section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Grid de Especificações */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .spec-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #2a2a30;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .spec-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .spec-card ul {
+            list-style: none;
+        }
+
+        .spec-card li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Painel de Administração */
+        .admin-section {
+            background-color: #16161a;
+            border-top: 2px solid #2a2a30;
+            padding: 60px 5%;
+        }
+
+        .admin-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #32323a;
+            text-align: center;
+        }
+
+        .admin-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-dark);
+            border: 1px solid #32323a;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .admin-panel {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #32323a;
+        }
+
+        .admin-panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .error-msg {
+            color: #ff4a4a;
+            margin-top: 10px;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 5%;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #2a2a30;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">PGL<span>.</span></div>
+        <nav>
+            <a href="#projeto">O Projeto</a>
+            <a href="#specs">Engenharia</a>
+            <a href="#admin">Área Restrita</a>
+        </nav>
+    </header>
+
+    <!-- Seção Principal (Hero) -->
+    <section class="hero" id="projeto">
+        <h1>Mudando o Brasil com o <span>Pop-Pod</span></h1>
+        <p>A PGL apresenta o dispositivo de micro-mobilidade definitivo. A agilidade de uma moto com a segurança e o conforto de um carro, projetado sob medida para superar os desafios das grandes cidades brasileiras.</p>
+        
+        <!-- Bloco da Imagem Oficial do Conceito -->
+        <div class="vehicle-image-container">
+            <!-- NOTA: Insira o link final da sua imagem aqui na propriedade 'src' -->
+            <img src="image_uPgF2H.png" alt="Conceito Visual Pop-Pod PGL">
+        </div>
+    </section>
+
+    <!-- Seção de Especificações Técnicas -->
+    <section class="section" id="specs">
+        <h2 class="section-title">Engenharia Integrada e Materiais</h2>
+        <div class="specs-grid">
+            
+            <div class="spec-card">
+                <h3>Chassi & Segurança</h3>
+                <ul>
+                    <li>• Gaiola de proteção integrada em aço carbono SAE 1020 de parede fina.</li>
+                    <li>• Plataforma ultra-estreita em arranjo tandem (um passageiro atrás do outro).</li>
+                    <li>• Assoalho reforçado com chapas de alumínio corrugado.</li>
+                </ul>
+            </div>
+
+            <div class="spec-card">
+                <h3>Carroceria Sustentável</h3>
+                <ul>
+                    <li>• Painéis modulares em Polímero Reciclado Termoformatado (PEAD/ABS).</li>
+                    <li>• Para-brisa automotivo em vidro laminado resistente a riscos.</li>
+                    <li>• Janelas e fechamentos em policarbonato de alta resistência mecânica.</li>
+                </ul>
+            </div>
+
+            <div class="spec-card">
+                <h3>Trem de Força & Rodas</h3>
+                <ul>
+                    <li>• Motor elétrico do tipo Hub de 4000W a 5000W traseiro (sem marchas ou correntes).</li>
+                    <li>• Suspensão robusta MacPherson de curso longo para o asfalto brasileiro.</li>
+                    <li>• Rodas aro 14 com componentes de freio intercambiáveis com motos populares.</li>
+                </ul>
+            </div>
+
+            <div class="spec-card">
+                <h3>Sistema de Baterias</h3>
+                <ul>
+                    <li>• Módulos de Bateria de Lítio (LiFePO4) removíveis tipo "gaveta".</li>
+                    <li>• Recarga direta em qualquer tomada convencional de 110V ou 220V.</li>
+                    <li>• Painel de instrumentos integrado com suporte inteligente para smartphone.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Área de Administração Protegida por Senha -->
+    <section class="admin-section" id="admin">
+        <div class="admin-container">
+            <h2>🔐 Painel de Controle PGL</h2>
+            <div id="login-form">
+                <div class="input-group">
+                    <label for="admin-password">Senha de Administrador</label>
+Senha incorreta. Tente novamente.
+
+Acessar Sistema
+Painel Administrativo Ativo
+Bem-vindo de volta, Pedro. Modificações do Pop-Pod liberadas:
+Editar Dados do Projeto
+Gerenciar Arquivos CAD/Moldes
+Sair do Painel
+
+
+© 2026 PGL Soluções em Mobilidade. Todos os direitos reservados.
+function verifyPassword() {
+const passwordInput = document.getElementById('admin-password').value;
+const errorMessage = document.getElementById('error-message');
+const loginForm = document.getElementById('login-form');
+const adminContent = document.getElementById('admin-content');
+// Validação estrita conforme solicitado
+if (passwordInput === 'Pedro.minecraft') {
+errorMessage.style.display = 'none';
+loginForm.style.display = 'none';
+adminContent.style.display = 'block';
+} else {
+errorMessage.style.display = 'block';
+document.getElementById('admin-password').value = '';
+}
+}
+function logout() {
+document.getElementById('login-form').style.display = 'block';
+document.getElementById('admin-content').style.display = 'none';}
+document.getElementById('admin-password').value = '';
