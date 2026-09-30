@@ -1,412 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PGL - Projeto Pop-Pod | A Revolução da Mobilidade Urbana</title>
-    <style>
-        :root {
-            --primary: #00ff88;
-            --bg-dark: #121214;
-            --bg-card: #1a1a1e;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a5;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        header {
-            background-color: rgba(26, 26, 30, 0.95);
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #2a2a30;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: 2px;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        nav a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        .hero {
-            padding: 150px 5% 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at top, #1f3d31 0%, var(--bg-dark) 70%);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin-bottom: 40px;
-        }
-
-        .vehicle-image-container {
-            width: 100%;
-            max-width: 900px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border: 2px solid #2a2a30;
-            margin-bottom: 40px;
-        }
-
-        .vehicle-image-container img {
-            width: 100%;
-            display: block;
-        }
-
-        .section {
-            padding: 80px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .spec-card {
-            background-color: var(--bg-card);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #2a2a30;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .spec-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .spec-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .spec-card ul {
-            list-style: none;
-        }
-
-        .spec-card li {
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .admin-section {
-            background-color: #16161a;
-            border-top: 2px solid #2a2a30;
-            padding: 60px 5%;
-        }
-
-        .admin-container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: var(--bg-card);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #32323a;
-            text-align: center;
-        }
-
-        .admin-container h2 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--bg-dark);
-            border: 1px solid #32323a;
-            border-radius: 6px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .input-group input:focus {
-            border-color: var(--primary);
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: #000;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        #login-form {
-            display: block;
-        }
-
-        #admin-content {
-            display: none;
-            text-align: left;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #32323a;
-        }
-
-        #admin-content h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        #admin-content p {
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        #admin-content ul {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        #admin-content li {
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .error-msg {
-            color: #ff4a4a;
-            margin-top: 10px;
-            display: none;
-            font-size: 0.9rem;
-        }
-
-        .logout-btn {
-            background-color: #ff4a4a;
-            color: #fff;
-            margin-top: 15px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 5%;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #2a2a30;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            nav { display: none; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pop-Pod PGL: micro-mobilidade elétrica, segura, compacta e sustentável para as cidades brasileiras.">
+  <meta name="theme-color" content="#07110d">
+  <title>PGL Pop-Pod | O futuro da mobilidade urbana</title>
+  <style>
+    :root{--primary:#00ff88;--primary-2:#00c86a;--bg:#07110d;--bg-2:#0d1914;--card:#111f18;--card-2:#16271e;--text:#f4fff9;--muted:#a6b8ad;--line:rgba(255,255,255,.1);--danger:#ff5665;--shadow:0 24px 70px rgba(0,0,0,.3)}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}body.light{--bg:#f4faf6;--bg-2:#e9f4ed;--card:#fff;--card-2:#eff9f2;--text:#102219;--muted:#557063;--line:rgba(9,40,23,.13);--shadow:0 24px 70px rgba(13,66,35,.12)}a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}.container{width:min(1160px,92%);margin:auto}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:var(--primary);color:#00150a;padding:.6rem;z-index:10000}.topbar{background:var(--primary);color:#00150a;text-align:center;font-size:.8rem;font-weight:800;padding:.38rem}.header{height:76px;display:flex;align-items:center;position:sticky;top:0;z-index:1000;background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}.nav{display:flex;align-items:center;justify-content:space-between;gap:2rem}.brand{font-size:1.5rem;font-weight:900;letter-spacing:2px}.brand span,.accent{color:var(--primary)}.links{display:flex;gap:1.5rem;align-items:center;font-size:.92rem;color:var(--muted)}.links a:hover{color:var(--primary)}.actions{display:flex;gap:.5rem;align-items:center}.icon-btn{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;width:38px;height:38px}.menu-btn{display:none}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.82rem 1.25rem;border-radius:10px;background:var(--primary);color:#00150a;font-weight:800;transition:.25s;box-shadow:0 8px 24px rgba(0,255,136,.15)}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}.btn.small{padding:.58rem .85rem;font-size:.85rem}.hero{position:relative;padding:7rem 0 5rem;overflow:hidden;background:radial-gradient(circle at 75% 25%,rgba(0,255,136,.18),transparent 32%),linear-gradient(135deg,var(--bg),var(--bg-2))}.hero:before{content:"";position:absolute;width:480px;height:480px;border:1px solid rgba(0,255,136,.12);border-radius:50%;right:-130px;top:-100px}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}.eyebrow{display:inline-flex;gap:.5rem;align-items:center;color:var(--primary);font-size:.8rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem}.eyebrow:before{content:"";width:28px;height:2px;background:var(--primary)}h1{font-size:clamp(2.6rem,6vw,5.5rem);line-height:1.02;letter-spacing:-3px;margin-bottom:1.3rem}h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.1;letter-spacing:-1px}h3{line-height:1.2}.hero-copy{color:var(--muted);font-size:1.12rem;max-width:600px}.hero-buttons{display:flex;gap:.8rem;flex-wrap:wrap;margin:2rem 0}.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2.5rem}.hero-stats strong{display:block;font-size:1.5rem;color:var(--primary)}.hero-stats span{font-size:.78rem;color:var(--muted)}.vehicle{position:relative;border:1px solid var(--line);border-radius:24px;padding:.6rem;background:linear-gradient(145deg,rgba(0,255,136,.18),var(--card));box-shadow:var(--shadow);transform:rotate(2deg)}.vehicle img{width:100%;height:430px;object-fit:cover;border-radius:18px;display:block;background:linear-gradient(135deg,#193b2a,#07110d)}.vehicle-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(7,17,13,.82);backdrop-filter:blur(10px);padding:.8rem 1rem;border:1px solid rgba(255,255,255,.14);border-radius:12px;font-size:.85rem}.vehicle-badge b{display:block;color:var(--primary)}.section{padding:6rem 0}.section.alt{background:var(--bg-2)}.section-head{text-align:center;max-width:720px;margin:0 auto 3rem}.section-head p{color:var(--muted);margin-top:1rem}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;transition:.25s}.card:hover{transform:translateY(-5px);border-color:rgba(0,255,136,.5)}.card-icon{font-size:2rem;margin-bottom:.8rem}.card h3{margin-bottom:.65rem}.card p,.card li{color:var(--muted);font-size:.94rem}.card ul{list-style:none}.card li{padding:.4rem 0;border-bottom:1px solid var(--line)}.card li:last-child{border:0}.icon-circle{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:rgba(0,255,136,.1);color:var(--primary);font-size:1.3rem;margin-bottom:1rem}.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.number{text-align:center;padding:1.5rem;border-right:1px solid var(--line)}.number:last-child{border:0}.number strong{display:block;font-size:2.25rem;color:var(--primary)}.number span{color:var(--muted);font-size:.85rem}.spec-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}.spec-list{display:grid;gap:.8rem}.spec-row{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}.spec-row span{color:var(--muted)}.spec-row b{color:var(--primary);text-align:right}.progress{height:7px;background:var(--card-2);border-radius:99px;overflow:hidden;margin-top:1.5rem}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--primary-2),var(--primary));border-radius:inherit}.simulator{background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:20px;padding:2rem;max-width:800px;margin:auto}.range-line{display:flex;justify-content:space-between;color:var(--muted);margin:1rem 0 .4rem}.range-line b{color:var(--primary)}input[type=range]{width:100%;accent-color:var(--primary)}.sim-result{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}.sim-result div{padding:1rem;border-radius:12px;background:rgba(0,0,0,.15)}.sim-result strong{display:block;font-size:1.5rem;color:var(--primary)}.sim-result span{font-size:.75rem;color:var(--muted)}.timeline{position:relative;max-width:780px;margin:auto}.timeline:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--line)}.timeline-item{position:relative;padding:0 0 2rem 3rem}.timeline-item:before{content:"";position:absolute;left:8px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 5px rgba(0,255,136,.12)}.timeline-item small{color:var(--primary);font-weight:800}.timeline-item p{color:var(--muted);margin-top:.35rem}.faq{max-width:800px;margin:auto;display:grid;gap:.8rem}.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}.faq summary{font-weight:800;cursor:pointer}.faq p{color:var(--muted);padding-top:.7rem}.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:2rem}.contact-info{display:grid;gap:1rem}.contact-item{padding:1.2rem;background:var(--card);border:1px solid var(--line);border-radius:12px}.contact-item b{display:block;color:var(--primary);margin-bottom:.2rem}.contact-item span{color:var(--muted)}form{display:grid;gap:1rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}label{font-size:.82rem;color:var(--muted);display:grid;gap:.4rem}input,textarea,select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:.85rem;outline:0}textarea{resize:vertical;min-height:130px}input:focus,textarea:focus,select:focus{border-color:var(--primary)}.footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--muted);font-size:.85rem}.footer-row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}.admin-section{background:linear-gradient(135deg,#08150e,#10251a)}.admin-box{max-width:500px;margin:auto}.admin-content{display:none;text-align:left}.admin-content ul{list-style:none;color:var(--muted);margin:1rem 0}.admin-content li{padding:.45rem 0;border-bottom:1px solid var(--line)}.error{display:none;color:var(--danger);font-size:.85rem;margin-top:.7rem}.toast{position:fixed;right:1.2rem;bottom:1.2rem;background:var(--card-2);border:1px solid var(--primary);color:var(--text);padding:1rem 1.2rem;border-radius:12px;box-shadow:var(--shadow);transform:translateY(150%);transition:.3s;z-index:3000}.toast.show{transform:translateY(0)}.reveal{opacity:0;transform:translateY(18px);transition:.7s}.reveal.visible{opacity:1;transform:none}
+    @media(max-width:900px){.hero-grid,.spec-layout,.contact-grid{grid-template-columns:1fr}.hero{padding-top:4rem}.vehicle{max-width:650px;margin:auto}.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.links{display:none;position:absolute;top:76px;left:0;right:0;padding:1rem 4%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.links.open{display:flex}.menu-btn{display:block}.header .btn{display:none}h1{letter-spacing:-1.5px}.hero{padding-bottom:3rem}.vehicle img{height:280px}.grid-3,.grid-4,.numbers,.sim-result,.form-grid{grid-template-columns:1fr}.number{border-right:0;border-bottom:1px solid var(--line)}.number:last-child{border:0}.section{padding:4rem 0}.admin-container{padding:1.3rem}}
+  </style>
 </head>
 <body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="topbar">⚡ Projeto em desenvolvimento · Mobilidade inteligente feita no Brasil</div>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#inicio">PGL<span>.</span></a>
+      <nav class="links" id="navLinks" aria-label="Navegação principal">
+        <a href="#projeto">Projeto</a><a href="#tecnologia">Tecnologia</a><a href="#especificacoes">Especificações</a><a href="#faq">FAQ</a><a href="#contato">Contato</a>
+      </nav>
+      <div class="actions"><button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button><button class="icon-btn" id="themeBtn" aria-label="Alternar tema">☀</button><a class="btn small" href="#contato">Fale conosco</a></div>
+    </div>
+  </header>
 
-    <header>
-        <div class="logo">PGL<span>.</span></div>
-        <nav>
-            <a href="#projeto">O Projeto</a>
-            <a href="#specs">Engenharia</a>
-            <a href="#admin">Área Restrita</a>
-        </nav>
-    </header>
-
-    <section class="hero" id="projeto">
-        <h1>Mudando o Brasil com o <span>Pop-Pod</span></h1>
-        <p>A PGL apresenta o dispositivo de micro-mobilidade definitivo. A agilidade de uma moto com a segurança e o conforto de um carro, projetado sob medida para superar os desafios das grandes cidades brasileiras.</p>
-
-        <div class="vehicle-image-container">
-            <img src="image_uPgF2H.png" alt="Conceito Visual Pop-Pod PGL">
-        </div>
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal"><div class="eyebrow">O futuro chegou</div><h1>Mude o jeito de <span class="accent">se mover.</span></h1><p class="hero-copy">O Pop-Pod é um veículo elétrico ultracompacto que combina a agilidade de uma moto com a proteção, o conforto e a eficiência que a cidade precisa.</p><div class="hero-buttons"><a class="btn" href="#projeto">Conheça o Pop-Pod →</a><a class="btn ghost" href="#simulador">Simule sua economia</a></div><div class="hero-stats"><div><strong>100%</strong><span>elétrico</span></div><div><strong>2</strong><span>ocupantes</span></div><div><strong>0</strong><span>emissões locais</span></div></div></div>
+        <div class="vehicle reveal"><img src="image_uPgF2H.png" alt="Conceito visual do veículo elétrico Pop-Pod" onerror="this.style.display='none';this.parentElement.classList.add('image-fallback')"><div class="vehicle-badge"><b>POP-POD PGL</b><span>Compacto por fora. Gigante no impacto.</span></div></div>
+      </div>
     </section>
 
-    <section class="section" id="specs">
-        <h2 class="section-title">Engenharia Integrada e Materiais</h2>
-        <div class="specs-grid">
-            <div class="spec-card">
-                <h3>Chassi & Segurança</h3>
-                <ul>
-                    <li>• Gaiola de proteção integrada em aço carbono SAE 1020 de parede fina.</li>
-                    <li>• Plataforma ultra-estreita em arranjo tandem (um passageiro atrás do outro).</li>
-                    <li>• Assoalho reforçado com chapas de alumínio corrugado.</li>
-                </ul>
-            </div>
+    <section class="section" id="projeto"><div class="container"><div class="section-head reveal"><div class="eyebrow">Por que Pop-Pod?</div><h2>Uma nova categoria de mobilidade</h2><p>Projetado para os desafios reais das cidades brasileiras: trânsito, custo, segurança e sustentabilidade.</p></div><div class="grid-3"><article class="card reveal"><div class="icon-circle">🛡️</div><h3>Proteção inteligente</h3><p>Estrutura de proteção integrada, cabine fechada e materiais resistentes para mais tranquilidade no dia a dia.</p></article><article class="card reveal"><div class="icon-circle">⚡</div><h3>Energia eficiente</h3><p>Motorização elétrica e baterias removíveis para recarregar com praticidade em tomadas convencionais.</p></article><article class="card reveal"><div class="icon-circle">🌱</div><h3>Menos impacto</h3><p>Dimensões compactas, componentes reaproveitáveis e zero emissões locais durante a condução.</p></article></div></div></section>
 
-            <div class="spec-card">
-                <h3>Carroceria Sustentável</h3>
-                <ul>
-                    <li>• Painéis modulares em Polímero Reciclado Termoformatado (PEAD/ABS).</li>
-                    <li>• Para-brisa automotivo em vidro laminado resistente a riscos.</li>
-                    <li>• Janelas e fechamentos em policarbonato de alta resistência mecânica.</li>
-                </ul>
-            </div>
+    <section class="section alt"><div class="container"><div class="numbers reveal"><div class="number"><strong>4–5 kW</strong><span>potência do motor</span></div><div class="number"><strong>14”</strong><span>rodas compactas</span></div><div class="number"><strong>110/220 V</strong><span>recarga acessível</span></div><div class="number"><strong>2 lugares</strong><span>configuração tandem</span></div></div></div></section>
 
-            <div class="spec-card">
-                <h3>Trem de Força & Rodas</h3>
-                <ul>
-                    <li>• Motor elétrico do tipo Hub de 4000W a 5000W traseiro (sem marchas ou correntes).</li>
-                    <li>• Suspensão robusta MacPherson de curso longo para o asfalto brasileiro.</li>
-                    <li>• Rodas aro 14 com componentes de freio intercambiáveis com motos populares.</li>
-                </ul>
-            </div>
+    <section class="section" id="tecnologia"><div class="container"><div class="section-head reveal"><div class="eyebrow">Engenharia integrada</div><h2>Tecnologia que trabalha por você</h2><p>Cada detalhe foi pensado para entregar praticidade, durabilidade e uma experiência de condução simples.</p></div><div class="grid-4"><article class="card reveal"><div class="card-icon">🔋</div><h3>Baterias gaveta</h3><p>Módulos LiFePO4 removíveis, com recarga dentro ou fora do veículo.</p></article><article class="card reveal"><div class="card-icon">📱</div><h3>Conectado</h3><p>Painel integrado e suporte inteligente para smartphone e navegação.</p></article><article class="card reveal"><div class="card-icon">🔧</div><h3>Modular</h3><p>Carroceria de painéis substituíveis para simplificar manutenção.</p></article><article class="card reveal"><div class="card-icon">🏙️</div><h3>Urbano</h3><p>Formato estreito para circular e estacionar com facilidade.</p></article></div></div></section>
 
-            <div class="spec-card">
-                <h3>Sistema de Baterias</h3>
-                <ul>
-                    <li>• Módulos de Bateria de Lítio (LiFePO4) removíveis tipo "gaveta".</li>
-                    <li>• Recarga direta em qualquer tomada convencional de 110V ou 220V.</li>
-                    <li>• Painel de instrumentos integrado com suporte inteligente para smartphone.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <section class="section alt" id="especificacoes"><div class="container spec-layout"><div class="reveal"><div class="eyebrow">Ficha técnica</div><h2>Pequeno no tamanho. Grande na engenharia.</h2><p class="hero-copy" style="margin-top:1rem">Uma plataforma pensada para evoluir com o projeto e atender diferentes necessidades de deslocamento urbano.</p><div class="progress"><i style="width:82%"></i></div><small style="color:var(--muted)">Eficiência de uso do espaço · 82%</small></div><div class="card reveal"><div class="spec-list"><div class="spec-row"><span>Motorização</span><b>Hub traseiro elétrico</b></div><div class="spec-row"><span>Potência estimada</span><b>4.000 a 5.000 W</b></div><div class="spec-row"><span>Estrutura</span><b>Aço carbono SAE 1020</b></div><div class="spec-row"><span>Carroceria</span><b>PEAD / ABS reciclado</b></div><div class="spec-row"><span>Suspensão</span><b>MacPherson de curso longo</b></div><div class="spec-row"><span>Freios e rodas</span><b>Aro 14 · componentes modulares</b></div><div class="spec-row"><span>Bateria</span><b>LiFePO4 removível</b></div></div></div></div></section>
 
-    <section class="admin-section" id="admin">
-        <div class="admin-container">
-            <h2>🔐 Painel de Controle PGL</h2>
+    <section class="section" id="simulador"><div class="container"><div class="section-head reveal"><div class="eyebrow">Faça as contas</div><h2>Quanto você pode economizar?</h2><p>Altere a distância diária para estimar uma comparação simples com um veículo convencional.</p></div><div class="simulator reveal"><div class="range-line"><span>Distância diária</span><b><span id="kmValue">30</span> km</b></div><input id="kmRange" type="range" min="5" max="150" value="30"><div class="sim-result"><div><strong id="monthValue">660</strong><span>km por mês</span></div><div><strong id="fuelValue">R$ 594</strong><span>estimativa combustível</span></div><div><strong id="saveValue">R$ 475</strong><span>economia potencial</span></div></div><small style="display:block;color:var(--muted);margin-top:1rem">Estimativa ilustrativa considerando 22 dias/mês. Os valores reais variam.</small></div></div></section>
 
-            <div id="login-form">
-                <div class="input-group">
-                    <label for="admin-password">Senha de Administrador</label>
-                    <input type="password" id="admin-password" placeholder="Digite sua senha">
-                </div>
-                <button class="btn" onclick="verifyPassword()">Acessar Sistema</button>
-                <div class="error-msg" id="error-message">Senha incorreta. Tente novamente.</div>
-            </div>
+    <section class="section alt"><div class="container"><div class="section-head reveal"><div class="eyebrow">Nossa jornada</div><h2>Do conceito para a cidade</h2></div><div class="timeline"><div class="timeline-item reveal"><small>FASE 01 · VISÃO</small><h3>Identificação do problema</h3><p>Entender como as pessoas se deslocam e quais barreiras tornam a mobilidade urbana mais cara e difícil.</p></div><div class="timeline-item reveal"><small>FASE 02 · ENGENHARIA</small><h3>Arquitetura do Pop-Pod</h3><p>Desenvolvimento da plataforma tandem, proteção estrutural e sistema elétrico modular.</p></div><div class="timeline-item reveal"><small>FASE 03 · VALIDAÇÃO</small><h3>Protótipos e testes</h3><p>Refinamento do conceito com testes de ergonomia, segurança, autonomia e manutenção.</p></div><div class="timeline-item reveal"><small>FASE 04 · FUTURO</small><h3>Mobilidade em escala</h3><p>Preparação para transformar o Pop-Pod em uma solução acessível para mais cidades brasileiras.</p></div></div></div></section>
 
-            <div id="admin-content">
-                <h3>Painel Administrativo Ativo</h3>
-                <p>Bem-vindo de volta, Pedro. Modificações do Pop-Pod liberadas:</p>
-                <ul>
-                    <li>✓ Editar Dados do Projeto</li>
-                    <li>✓ Gerenciar Arquivos CAD/Moldes</li>
-                    <li>✓ Sair do Painel</li>
-                </ul>
-                <button class="btn logout-btn" onclick="logout()">Sair do Painel</button>
-            </div>
-        </div>
-    </section>
+    <section class="section" id="faq"><div class="container"><div class="section-head reveal"><div class="eyebrow">Dúvidas frequentes</div><h2>Quer saber mais?</h2></div><div class="faq"><details class="reveal"><summary>O Pop-Pod é totalmente elétrico?</summary><p>Sim. O conceito foi projetado com motor elétrico traseiro e baterias LiFePO4 removíveis.</p></details><details class="reveal"><summary>Como as baterias são recarregadas?</summary><p>Os módulos foram pensados para serem recarregados em tomadas convencionais de 110 V ou 220 V.</p></details><details class="reveal"><summary>Quantas pessoas podem viajar?</summary><p>A configuração tandem foi planejada para duas pessoas, uma atrás da outra, mantendo o veículo estreito.</p></details><details class="reveal"><summary>O projeto já está à venda?</summary><p>O Pop-Pod apresentado nesta página é um projeto em desenvolvimento. Entre em contato para acompanhar novidades e parcerias.</p></details></div></div></section>
 
-    <footer>
-        <p>© 2026 PGL Soluções em Mobilidade. Todos os direitos reservados.</p>
-    </footer>
+    <section class="section alt" id="contato"><div class="container"><div class="section-head reveal"><div class="eyebrow">Vamos conversar</div><h2>Faça parte da próxima etapa</h2><p>Envie uma mensagem para conhecer o projeto, propor uma parceria ou acompanhar a evolução.</p></div><div class="contact-grid"><div class="contact-info reveal"><div class="contact-item"><b>📍 Base do projeto</b><span>Brasil · Mobilidade urbana</span></div><div class="contact-item"><b>✉️ E-mail</b><span>contato@pglmobilidade.com</span></div><div class="contact-item"><b>🚀 Parcerias</b><span>Estamos abertos a ideias, fornecedores e investidores.</span></div></div><div class="card reveal"><form id="contactForm"><div class="form-grid"><label>Nome<input required name="name" placeholder="Seu nome"></label><label>E-mail<input required type="email" name="email" placeholder="voce@email.com"></label></div><label>Assunto<select name="subject"><option>Quero saber mais</option><option>Propor parceria</option><option>Investimento</option><option>Imprensa</option></select></label><label>Mensagem<textarea required name="message" placeholder="Como podemos ajudar?"></textarea></label><button class="btn" type="submit">Enviar mensagem →</button></form></div></div></div></section>
 
-    <script>
-        function verifyPassword() {
-            const passwordInput = document.getElementById('admin-password').value;
-            const errorMessage = document.getElementById('error-message');
-            const loginForm = document.getElementById('login-form');
-            const adminContent = document.getElementById('admin-content');
-
-            if (passwordInput === 'Pedro.minecraft') {
-                errorMessage.style.display = 'none';
-                loginForm.style.display = 'none';
-                adminContent.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'block';
-                document.getElementById('admin-password').value = '';
-            }
-        }
-
-        function logout() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('admin-content').style.display = 'none';
-            document.getElementById('admin-password').value = '';
-        }
-
-        document.getElementById('admin-password').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                verifyPassword();
-            }
-        });
-    </script>
-
+    <section class="section admin-section" id="admin"><div class="container"><div class="admin-box card reveal"><div id="login-form"><div class="eyebrow">Área restrita</div><h2>Painel PGL</h2><p style="color:var(--muted);margin:1rem 0">Acesse as ferramentas administrativas do projeto.</p><form id="loginForm"><label>Senha de administrador<input id="admin-password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required></label><button class="btn" type="submit" style="margin-top:1rem">Acessar sistema</button></form><div class="error" id="error-message">Senha incorreta. Tente novamente.</div></div><div class="admin-content" id="admin-content"><div class="eyebrow">Acesso confirmado</div><h2>Painel ativo</h2><p style="color:var(--muted);margin-top:.7rem">Bem-vindo de volta, Pedro. Modificações do Pop-Pod liberadas:</p><ul><li>✓ Editar dados do projeto</li><li>✓ Gerenciar arquivos CAD e moldes</li><li>✓ Atualizar especificações técnicas</li><li>✓ Acompanhar etapas de desenvolvimento</li></ul><button class="btn ghost" id="logoutBtn" type="button">Sair do painel</button></div></div></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-row"><span>© 2026 PGL Soluções em Mobilidade. Todos os direitos reservados.</span><span>Feito para um futuro mais leve, limpo e inteligente. <span class="accent">●</span></span></div></footer>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const $=s=>document.querySelector(s);
+    const toast=(message)=>{const el=$('#toast');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3200)};
+    $('#menuBtn').addEventListener('click',()=>$('#navLinks').classList.toggle('open'));
+    document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+    $('#themeBtn').addEventListener('click',()=>{document.body.classList.toggle('light');$('#themeBtn').textContent=document.body.classList.contains('light')?'☾':'☀';localStorage.setItem('pop-theme',document.body.classList.contains('light')?'light':'dark')});
+    if(localStorage.getItem('pop-theme')==='light'){document.body.classList.add('light');$('#themeBtn').textContent='☾'}
+    const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    function updateSimulator(){const km=Number($('#kmRange').value);$('#kmValue').textContent=km;$('#monthValue').textContent=(km*22).toLocaleString('pt-BR');const fuel=km*22*.9;$('#fuelValue').textContent='R$ '+Math.round(fuel).toLocaleString('pt-BR');$('#saveValue').textContent='R$ '+Math.round(fuel*.8).toLocaleString('pt-BR')}$('#kmRange').addEventListener('input',updateSimulator);updateSimulator();
+    $('#contactForm').addEventListener('submit',e=>{e.preventDefault();e.target.reset();toast('Mensagem preparada! Obrigado pelo interesse no Pop-Pod.')});
+    $('#loginForm').addEventListener('submit',e=>{e.preventDefault();const pass=$('#admin-password').value;if(pass==='Pedro.minecraft'){$('#error-message').style.display='none';$('#login-form').style.display='none';$('#admin-content').style.display='block';toast('Acesso autorizado. Bem-vindo, Pedro!')}else{$('#error-message').style.display='block';$('#admin-password').value=''}});
+    $('#logoutBtn').addEventListener('click',()=>{$('#login-form').style.display='block';$('#admin-content').style.display='none';$('#admin-password').value='';toast('Você saiu do painel.')});
+  </script>
 </body>
 </html>
