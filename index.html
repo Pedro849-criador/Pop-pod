@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Header e Navegação */
         header {
             background-color: rgba(26, 26, 30, 0.95);
             padding: 20px 5%;
@@ -65,7 +64,6 @@
             color: var(--primary);
         }
 
-        /* Seção Hero */
         .hero {
             padding: 150px 5% 80px;
             display: flex;
@@ -92,7 +90,6 @@
             margin-bottom: 40px;
         }
 
-        /* Container da Imagem do Projeto */
         .vehicle-image-container {
             width: 100%;
             max-width: 900px;
@@ -108,7 +105,6 @@
             display: block;
         }
 
-        /* Seções de Conteúdo */
         .section {
             padding: 80px 5%;
             max-width: 1200px;
@@ -132,7 +128,6 @@
             border-radius: 2px;
         }
 
-        /* Grid de Especificações */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -168,7 +163,6 @@
             font-size: 0.95rem;
         }
 
-        /* Painel de Administração */
         .admin-section {
             background-color: #16161a;
             border-top: 2px solid #2a2a30;
@@ -234,7 +228,11 @@
             opacity: 0.9;
         }
 
-        .admin-panel {
+        #login-form {
+            display: block;
+        }
+
+        #admin-content {
             display: none;
             text-align: left;
             margin-top: 20px;
@@ -242,9 +240,24 @@
             border-top: 1px dashed #32323a;
         }
 
-        .admin-panel h3 {
+        #admin-content h3 {
             color: var(--primary);
             margin-bottom: 15px;
+        }
+
+        #admin-content p {
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        #admin-content ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        #admin-content li {
+            color: var(--text-muted);
+            margin-bottom: 10px;
         }
 
         .error-msg {
@@ -252,6 +265,12 @@
             margin-top: 10px;
             display: none;
             font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background-color: #ff4a4a;
+            color: #fff;
+            margin-top: 15px;
         }
 
         footer {
@@ -270,7 +289,6 @@
 </head>
 <body>
 
-    <!-- Cabeçalho -->
     <header>
         <div class="logo">PGL<span>.</span></div>
         <nav>
@@ -280,23 +298,18 @@
         </nav>
     </header>
 
-    <!-- Seção Principal (Hero) -->
     <section class="hero" id="projeto">
         <h1>Mudando o Brasil com o <span>Pop-Pod</span></h1>
         <p>A PGL apresenta o dispositivo de micro-mobilidade definitivo. A agilidade de uma moto com a segurança e o conforto de um carro, projetado sob medida para superar os desafios das grandes cidades brasileiras.</p>
-        
-        <!-- Bloco da Imagem Oficial do Conceito -->
+
         <div class="vehicle-image-container">
-            <!-- NOTA: Insira o link final da sua imagem aqui na propriedade 'src' -->
             <img src="image_uPgF2H.png" alt="Conceito Visual Pop-Pod PGL">
         </div>
     </section>
 
-    <!-- Seção de Especificações Técnicas -->
     <section class="section" id="specs">
         <h2 class="section-title">Engenharia Integrada e Materiais</h2>
         <div class="specs-grid">
-            
             <div class="spec-card">
                 <h3>Chassi & Segurança</h3>
                 <ul>
@@ -332,44 +345,68 @@
                     <li>• Painel de instrumentos integrado com suporte inteligente para smartphone.</li>
                 </ul>
             </div>
-
         </div>
     </section>
 
-    <!-- Área de Administração Protegida por Senha -->
     <section class="admin-section" id="admin">
         <div class="admin-container">
             <h2>🔐 Painel de Controle PGL</h2>
+
             <div id="login-form">
                 <div class="input-group">
                     <label for="admin-password">Senha de Administrador</label>
-Senha incorreta. Tente novamente.
+                    <input type="password" id="admin-password" placeholder="Digite sua senha">
+                </div>
+                <button class="btn" onclick="verifyPassword()">Acessar Sistema</button>
+                <div class="error-msg" id="error-message">Senha incorreta. Tente novamente.</div>
+            </div>
 
-Acessar Sistema
-Painel Administrativo Ativo
-Bem-vindo de volta, Pedro. Modificações do Pop-Pod liberadas:
-Editar Dados do Projeto
-Gerenciar Arquivos CAD/Moldes
-Sair do Painel
+            <div id="admin-content">
+                <h3>Painel Administrativo Ativo</h3>
+                <p>Bem-vindo de volta, Pedro. Modificações do Pop-Pod liberadas:</p>
+                <ul>
+                    <li>✓ Editar Dados do Projeto</li>
+                    <li>✓ Gerenciar Arquivos CAD/Moldes</li>
+                    <li>✓ Sair do Painel</li>
+                </ul>
+                <button class="btn logout-btn" onclick="logout()">Sair do Painel</button>
+            </div>
+        </div>
+    </section>
 
+    <footer>
+        <p>© 2026 PGL Soluções em Mobilidade. Todos os direitos reservados.</p>
+    </footer>
 
-© 2026 PGL Soluções em Mobilidade. Todos os direitos reservados.
-function verifyPassword() {
-const passwordInput = document.getElementById('admin-password').value;
-const errorMessage = document.getElementById('error-message');
-const loginForm = document.getElementById('login-form');
-const adminContent = document.getElementById('admin-content');
-// Validação estrita conforme solicitado
-if (passwordInput === 'Pedro.minecraft') {
-errorMessage.style.display = 'none';
-loginForm.style.display = 'none';
-adminContent.style.display = 'block';
-} else {
-errorMessage.style.display = 'block';
-document.getElementById('admin-password').value = '';
-}
-}
-function logout() {
-document.getElementById('login-form').style.display = 'block';
-document.getElementById('admin-content').style.display = 'none';}
-document.getElementById('admin-password').value = '';
+    <script>
+        function verifyPassword() {
+            const passwordInput = document.getElementById('admin-password').value;
+            const errorMessage = document.getElementById('error-message');
+            const loginForm = document.getElementById('login-form');
+            const adminContent = document.getElementById('admin-content');
+
+            if (passwordInput === 'Pedro.minecraft') {
+                errorMessage.style.display = 'none';
+                loginForm.style.display = 'none';
+                adminContent.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'block';
+                document.getElementById('admin-password').value = '';
+            }
+        }
+
+        function logout() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('admin-content').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+        }
+
+        document.getElementById('admin-password').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verifyPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
